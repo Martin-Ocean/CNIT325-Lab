@@ -15,7 +15,7 @@ import java.util.*;
  * @author gong62
  */
 public class EchoServer {
-    public static void main(String[] args) {
+    public void start() {
         try {
             ServerSocket s = new ServerSocket(8189); // server socket
             boolean over = false;
@@ -31,7 +31,7 @@ public class EchoServer {
                     boolean done = false;
                     while(!done && in.hasNextLine()) { // while there are lines to read, for this connection
                         String lineIn = in.nextLine();
-                        System.out.println(lineIn.trim());
+                        out.println(new Date().toString());
                         
                         if (lineIn.trim().equals("BYE")) // to kill the server, enter BYE from the client
                         {
@@ -47,6 +47,10 @@ public class EchoServer {
             e2.printStackTrace();
             System.out.println("Problem at e2(outter)");
         }
+    }
+    public static void main(String[] args) {
+        EchoServer server = new EchoServer();
+        server.start();
     }
     
 }

@@ -16,20 +16,43 @@ import java.util.*;
  * @author gong62
  */
 public class SocketTest {
+    protected String host = "";
+    protected int port = 0;
+    protected String line = "";
+    
+    public void setHost(String h) {
+        this.host = h;
+    }
+    public String getHost() 
+    {
+        return this.host;
+    }
+    
+    public void setPort(int port) {
+        this.port = port;
+    }
+    
+    public int getPort() {
+        return this.port;
+    }
+    public String getLine() {
+        return line;
+    }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public void connect() {
+        
         try {
-            Socket s = new Socket("time-A.timefreq.bldrdoc.gov", 13);
+            Socket s = new Socket(getHost().trim(), getPort());
             try {
                 InputStream inStream = s.getInputStream();
                 Scanner in = new Scanner(inStream);
                 while (in.hasNextLine())
                 {
-                    String line = in.nextLine();
-                    System.out.println(line);
+                    line = in.nextLine();
+   
                 }
             }//end try
             finally {
